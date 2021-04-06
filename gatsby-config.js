@@ -1,3 +1,11 @@
+const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development"
+
+console.log(`Using environment config: '${activeEnv}'`)
+
+require("dotenv").config({
+  path: `.env.${activeEnv}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: "Lily Eisner",
@@ -6,9 +14,8 @@ module.exports = {
     {
       resolve: "gatsby-source-contentful",
       options: {
-        accessToken:
-          "adbfa6b9aacac04464f26d90a991b8fa51546c16426081f6f6d8719f35f45df6",
-        spaceId: "",
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
       },
     },
     "gatsby-plugin-postcss",
